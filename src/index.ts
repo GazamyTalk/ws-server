@@ -14,14 +14,14 @@ import * as services from "./services";
 const port = serverConfig.port;
 
 const server = http.createServer();
-const ioConnect = new Server<
+const io = new Server<
     ClientToServerEvents,
     ServerToClientEvents,
     InterServerEvents,
     SocketData
->(server);
+>(server, { path: '/ws' });
 // const io = ioConnect.of(/^\/ws\/[0-9a-f]+$/);
-const io = ioConnect.of("/ws");
+// const io = ioConnect.of("/ws");
 
 // const io = startSocketServer(server);
 io.on("connection", (socket) => {
